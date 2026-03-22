@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       }
     });
   } catch (error: any) {
-    console.error('Error generating DOCX:', error);
-    return NextResponse.json({ error: error.message || 'Failed to generate DOCX' }, { status: 500 });
+    console.error('Error generating DOCX:', error.stack || error);
+    return NextResponse.json({ error: error.message || 'Failed to generate DOCX', stack: error.stack }, { status: 500 });
   }
 }
