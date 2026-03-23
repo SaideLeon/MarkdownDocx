@@ -45,6 +45,7 @@ export default function Home() {
           alignItems: 'center',
           justifyContent: 'space-between',
           height: '64px',
+          flexShrink: 0,
           backdropFilter: 'blur(8px)',
           background: 'rgba(15, 14, 13, 0.85)',
         }}
@@ -110,7 +111,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main content */}
+      {/* Main content — scrollável */}
       <div
         style={{
           position: 'relative',
@@ -122,7 +123,7 @@ export default function Home() {
           maxWidth: '960px',
           width: '100%',
           margin: '0 auto',
-          padding: '2.5rem 2rem',
+          padding: '2.5rem 2rem 1rem',
           gap: '1.75rem',
         }}
       >
@@ -218,29 +219,37 @@ export default function Home() {
 
         {/* Editor */}
         <MarkdownEditor value={markdown} onChange={setMarkdown} />
+      </div>
 
-        {/* Footer bar */}
+      {/* Barra fixa de exportação — fora do scroll */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          flexShrink: 0,
+          borderTop: '1px solid #2a2520',
+          background: 'rgba(15, 14, 13, 0.95)',
+          backdropFilter: 'blur(12px)',
+          padding: '0.75rem 2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '0.75rem',
+          maxWidth: '100%',
+        }}
+      >
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1rem',
+            fontSize: '11px',
+            color: '#3a3530',
+            fontFamily: 'monospace',
+            letterSpacing: '0.05em',
           }}
         >
-          <div
-            style={{
-              fontSize: '11px',
-              color: '#3a3530',
-              fontFamily: 'monospace',
-              letterSpacing: '0.05em',
-            }}
-          >
-            {markdown.split('\n').length} linhas · {markdown.length} caracteres
-          </div>
-          <ExportButton onClick={exportDocx} loading={loading} filename={filename} />
+          {markdown.split('\n').length} linhas · {markdown.length} caracteres
         </div>
+        <ExportButton onClick={exportDocx} loading={loading} filename={filename} />
       </div>
 
       {/* Footer */}
@@ -248,8 +257,9 @@ export default function Home() {
         style={{
           position: 'relative',
           zIndex: 1,
+          flexShrink: 0,
           borderTop: '1px solid #1e1b18',
-          padding: '1rem 2.5rem',
+          padding: '0.75rem 2.5rem',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
